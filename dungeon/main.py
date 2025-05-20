@@ -8,40 +8,49 @@ pygame.display.set_caption("Dungeon Game")
 # Create clock for FPS
 clock = pygame.time.Clock()
 
-# define character movements
+# Define character movements
 moving_left = False
 moving_right = False
 moving_up = False
 moving_down = False
 
-# scale function
+# Scale function
 def scale_image(image, scale):
     return pygame.transform.scale(image, (image.get_width() * scale, image.get_height() * scale))
 
+# Load character images
+character_animations = []
+character_types = ["player", "buggy", "chunky", "ghosty", "kibby", "kitty", "muddy"]
+
 animation_types = ["standing", "running"]
 animated_player_images = []
-for animation_type in animation_types:
-    temp_list = []
-    for i in range(4):
-        player_image =  pygame.image.load(f"/Users/izaiahharrison/Repos/python_pygame/dungeon/assets/character_0/{animation_type}/{i}.png")
-        player_image = scale_image(player_image, constants.SCALE)
-        temp_list.append(player_image)
-    animated_player_images.append(temp_list)
+
+for character_type in character_types:
+    animation_list = []
+    for animation_type in animation_types:
+        temp_list = []
+        for i in range(4):
+            player_image =  pygame.image.load(f"/Users/izaiahharrison/Repos/python_pygame/dungeon/assets/characters/{character_type}/{animation_type}/{i}.png")
+            player_image = scale_image(player_image, constants.SCALE)
+            temp_list.append(player_image)
+        animated_player_images.append(temp_list)
+        
+    animation_list.append(animation_list)
 
 # Create character
-character = Character(100, 100, animated_player_images)
+player = Character(100, 100, animated_player_images)
 
 # Game Loop
 running = True
 while running:
 
-    # set FPS
+    # Set FPS
     clock.tick(constants.FPS)
 
     # Clear background
     screen.fill(constants.BACKGROUND_WHITE)
 
-    # calculate characters movement delta x and delta y
+    # Calculate characters movement delta x and delta y
     deltaX = 0
     deltaY = 0
     if moving_left:
@@ -53,20 +62,20 @@ while running:
     if moving_down:
         deltaY += constants.SPEED
 
-    # Update character movements
-    character.move(deltaX, deltaY)
+    # Update player movements
+    player.move(deltaX, deltaY)
 
-    # draw character on screen
-    character.draw_player(screen)
+    # Draw player on screen
+    player.draw_player(screen)
 
-    # Update character
-    character.update()
+    # Update player
+    player.update()
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    # keyboard inputs
+    # Keyboard inputs
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_LEFT:
             moving_left = True
