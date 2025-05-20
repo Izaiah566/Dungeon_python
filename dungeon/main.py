@@ -30,7 +30,7 @@ for character_type in character_types:
     for animation_type in animation_types:
         temp_list = []
         for i in range(4):
-            player_image =  pygame.image.load(f"/Users/izaiahharrison/Repos/python_pygame/dungeon/assets/characters/{character_type}/{animation_type}/{i}.png")
+            player_image =  pygame.image.load(f"./assets/characters/{character_type}/{animation_type}/{i}.png")
             player_image = scale_image(player_image, constants.SCALE)
             temp_list.append(player_image)
         animated_player_images.append(temp_list)
