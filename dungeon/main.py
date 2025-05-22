@@ -23,22 +23,21 @@ character_animations = []
 character_types = ["player", "buggy", "chunky", "ghosty", "kibby", "kitty", "muddy"]
 
 animation_types = ["standing", "running"]
-animated_player_images = []
 
 for character_type in character_types:
-    animation_list = []
+    animated_character_images = []
     for animation_type in animation_types:
         temp_list = []
         for i in range(4):
-            player_image =  pygame.image.load(f"./assets/characters/{character_type}/{animation_type}/{i}.png")
+            player_image =  pygame.image.load(f"/Users/izaiahharrison/Repos/python_pygame/dungeon/assets/characters/{character_type}/{animation_type}/{i}.png")
             player_image = scale_image(player_image, constants.SCALE)
             temp_list.append(player_image)
-        animated_player_images.append(temp_list)
+        animated_character_images.append(temp_list)
         
-    animation_list.append(animation_list)
+    character_animations.append(animated_character_images)
 
 # Create character
-player = Character(100, 100, animated_player_images)
+player = Character(100, 100, character_animations, 3)
 
 # Game Loop
 running = True
